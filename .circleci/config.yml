@@ -33,8 +33,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: BuildImage
+          name: Build Image
           command: mvn spring-boot:build-image
+      - run:
+          name: List Images
+          command: docker images
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
