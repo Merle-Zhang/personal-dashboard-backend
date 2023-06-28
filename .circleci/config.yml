@@ -26,6 +26,14 @@ jobs:
       - run:
           name: Test
           command: mvn test
+  build-image:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+      - run:
+          name: BuildImage
+          command: mvn spring-boot:build-image
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -34,3 +42,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      - build-image
