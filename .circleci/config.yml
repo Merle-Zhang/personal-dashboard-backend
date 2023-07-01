@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  aws-ecr: circleci/aws-ecr@8.2.1
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -47,3 +50,6 @@ workflows:
     jobs:
       - build-and-test
       - build-image
+      - aws-ecr/build-and-push-image:
+          repo: personal-dashboard
+          tag: "${CIRCLE_SHA1}"
